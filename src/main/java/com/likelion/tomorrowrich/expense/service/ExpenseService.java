@@ -10,6 +10,7 @@ import com.likelion.tomorrowrich.expense.entity.Expense;
 import com.likelion.tomorrowrich.expense.repository.ExpenseRepository;
 import com.likelion.tomorrowrich.global.exception.BusinessException;
 import com.likelion.tomorrowrich.global.exception.ErrorCode;
+import com.likelion.tomorrowrich.mission.service.MissionService;
 import com.likelion.tomorrowrich.user.entity.User;
 import com.likelion.tomorrowrich.user.repository.UserRepository;
 import java.time.LocalDate;
@@ -26,15 +27,18 @@ public class ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final MissionService missionService;
 
     public ExpenseService(
             ExpenseRepository expenseRepository,
             CategoryRepository categoryRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            MissionService missionService
     ) {
         this.expenseRepository = expenseRepository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
+        this.missionService = missionService;
     }
 
     public ExpenseCreateResponseDTO createExpense(Long userId, ExpenseCreateRequestDTO request) {
@@ -206,9 +210,6 @@ public class ExpenseService {
     }
 
     private List<Long> updateExpenseMissionProgress(User user, Expense expense) {
-        /*
-         * 현재 미션 기능 연결 전이므로 빈 리스트를 반환함
-         */
-        return List.of();
+        return missionService.updateExpenseRecordMissionProgress(user, expense.getExpenseDate());
     }
 }
