@@ -60,7 +60,8 @@ public class ExpenseController {
 
     private Long getLoginUserId() {
         /*
-         * 현재는 인증 모듈 연결 전 개발/테스트용 임시 사용자 id임
+         * TODO:
+         * 현재는 임시 사용자 id임
          */
         return 1L;
     }

@@ -27,6 +27,10 @@ public class HomeController {
     }
 
     private Long getLoginUserId() {
+        /*
+         * TODO:
+         * 현재는 임시 사용자 id임
+         */
         return 1L;
     }
 }
