@@ -1,5 +1,6 @@
 package com.likelion.tomorrowrich.mission.controller;
 
+import com.likelion.tomorrowrich.global.security.SecurityUtil;
 import com.likelion.tomorrowrich.mission.dto.MissionCompleteRequestDTO;
 import com.likelion.tomorrowrich.mission.dto.MissionCompleteResponseDTO;
 import com.likelion.tomorrowrich.mission.dto.MissionListResponseDTO;
@@ -18,16 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class MissionController {
 
     private final MissionService missionService;
+    private final SecurityUtil securityUtil;
 
-    public MissionController(MissionService missionService) {
+    public MissionController(
+            MissionService missionService,
+            SecurityUtil securityUtil
+    ) {
         this.missionService = missionService;
+        this.securityUtil = securityUtil;
     }
 
     @GetMapping
     public ResponseEntity<MissionListResponseDTO> getMissions(
             @RequestParam String date
     ) {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         MissionListResponseDTO response = missionService.getMissions(userId, date);
 
@@ -39,18 +45,10 @@ public class MissionController {
             @PathVariable Long missionId,
             @RequestBody MissionCompleteRequestDTO request
     ) {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         MissionCompleteResponseDTO response = missionService.completeMission(userId, missionId, request);
 
         return ResponseEntity.ok(response);
-    }
-
-    private Long getLoginUserId() {
-        /*
-         * TODO:
-         * 현재는 인증 모듈 연결 전 개발/테스트용 임시 사용자 id임
-         */
-        return 1L;
     }
 }

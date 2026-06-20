@@ -1,5 +1,6 @@
 package com.likelion.tomorrowrich.home.controller;
 
+import com.likelion.tomorrowrich.global.security.SecurityUtil;
 import com.likelion.tomorrowrich.home.dto.HomeResponseDTO;
 import com.likelion.tomorrowrich.home.service.HomeService;
 import org.springframework.http.ResponseEntity;
@@ -12,25 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     private final HomeService homeService;
+    private final SecurityUtil securityUtil;
 
-    public HomeController(HomeService homeService) {
+    public HomeController(
+            HomeService homeService,
+            SecurityUtil securityUtil
+    ) {
         this.homeService = homeService;
+        this.securityUtil = securityUtil;
     }
 
     @GetMapping
     public ResponseEntity<HomeResponseDTO> getHome() {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         HomeResponseDTO response = homeService.getHome(userId);
 
         return ResponseEntity.ok(response);
-    }
-
-    private Long getLoginUserId() {
-        /*
-         * TODO:
-         * 현재는 임시 사용자 id임
-         */
-        return 1L;
     }
 }

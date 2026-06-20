@@ -15,9 +15,10 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ) {
         ErrorCode errorCode = exception.getErrorCode();
+
         return ResponseEntity
                 .status(errorCode.getStatus())
-                .body(ErrorResponse.of(errorCode, request.getRequestURI()));
+                .body(ErrorResponse.of(errorCode, createDetails(request)));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
     ) {
         return ResponseEntity
                 .badRequest()
-                .body(ErrorResponse.of(ErrorCode.INVALID_REQUEST, request.getRequestURI()));
+                .body(ErrorResponse.of(ErrorCode.INVALID_REQUEST, createDetails(request)));
     }
 
     @ExceptionHandler(Exception.class)
@@ -37,6 +38,10 @@ public class GlobalExceptionHandler {
     ) {
         return ResponseEntity
                 .internalServerError()
-                .body(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, request.getRequestURI()));
+                .body(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, createDetails(request)));
+    }
+
+    private String createDetails(HttpServletRequest request) {
+        return "uri=" + request.getRequestURI();
     }
 }

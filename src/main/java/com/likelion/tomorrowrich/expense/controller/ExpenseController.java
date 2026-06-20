@@ -5,6 +5,7 @@ import com.likelion.tomorrowrich.expense.dto.ExpenseCreateResponseDTO;
 import com.likelion.tomorrowrich.expense.dto.ExpenseUpdateRequestDTO;
 import com.likelion.tomorrowrich.expense.dto.ExpenseUpdateResponseDTO;
 import com.likelion.tomorrowrich.expense.service.ExpenseService;
+import com.likelion.tomorrowrich.global.security.SecurityUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,16 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExpenseController {
 
     private final ExpenseService expenseService;
+    private final SecurityUtil securityUtil;
 
-    public ExpenseController(ExpenseService expenseService) {
+    public ExpenseController(
+            ExpenseService expenseService,
+            SecurityUtil securityUtil
+    ) {
         this.expenseService = expenseService;
+        this.securityUtil = securityUtil;
     }
 
     @PostMapping
     public ResponseEntity<ExpenseCreateResponseDTO> createExpense(
             @RequestBody ExpenseCreateRequestDTO request
     ) {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         ExpenseCreateResponseDTO response = expenseService.createExpense(userId, request);
 
@@ -40,7 +46,7 @@ public class ExpenseController {
             @PathVariable Long expenseId,
             @RequestBody ExpenseUpdateRequestDTO request
     ) {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         ExpenseUpdateResponseDTO response = expenseService.updateExpense(userId, expenseId, request);
 
@@ -51,18 +57,10 @@ public class ExpenseController {
     public ResponseEntity<String> deleteExpense(
             @PathVariable Long expenseId
     ) {
-        Long userId = getLoginUserId();
+        Long userId = securityUtil.getCurrentUserId();
 
         String response = expenseService.deleteExpense(userId, expenseId);
 
         return ResponseEntity.ok(response);
-    }
-
-    private Long getLoginUserId() {
-        /*
-         * TODO:
-         * 현재는 임시 사용자 id임
-         */
-        return 1L;
     }
 }

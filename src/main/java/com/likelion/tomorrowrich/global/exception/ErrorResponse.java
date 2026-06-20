@@ -15,8 +15,8 @@ public record ErrorResponse(
         return new ErrorResponse(
                 LocalDateTime.now(),
                 errorCode.getStatus().value(),
-                errorCode.getStatus().getReasonPhrase(),
-                errorCode.getMessage(),
+                errorCode.getError(),
+                errorCode.getStatus() + " \"" + errorCode.getMessage() + "\"",
                 details,
                 errorCode.getCode()
         );
