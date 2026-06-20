@@ -7,7 +7,6 @@ SignupRequestDTO
 LoginRequestDTO
 SignupResponseDTO
 CheckLoginIdResponseDTO
-ConsumptionCategoryListResponseDTO
 OnboardingRequestDTO
 ExpenseCreateRequestDTO
 ExpenseUpdateRequestDTO
@@ -38,7 +37,6 @@ SignupException
 LoginException
 CheckLoginIdException
 LogoutException
-CategoryException
 OnboardingException
 HomeException
 ExpenseCreateException

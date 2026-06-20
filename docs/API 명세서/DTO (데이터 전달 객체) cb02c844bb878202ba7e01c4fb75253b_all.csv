@@ -7,7 +7,6 @@ SignupRequestDTO,API Request,[인증] 회원가입
 LoginRequestDTO,API Request,[인증] 로그인
 SignupResponseDTO,API Response,[인증] 회원가입
 CheckLoginIdResponseDTO,API Response,[인증] 아이디 중복 확인
-ConsumptionCategoryListResponseDTO,API Response,[온보딩] 소비 카테고리 조회
 OnboardingRequestDTO,API Request,[온보딩] 온보딩 저장
 LoginException,API Exception,[인증] 로그인
 ExpenseCreateRequestDTO,API Request,[소비] 소비 등록
@@ -15,7 +14,6 @@ CheckLoginIdException,API Exception,[인증] 아이디 중복 확인
 ExpenseUpdateRequestDTO,API Request,[소비] 소비 기록 수정
 LogoutException,API Exception,[인증] 로그아웃
 MissionCompleteRequestDTO,API Request,[미션] 미션 완료
-CategoryException,API Exception,[온보딩] 소비 카테고리 조회
 JwtTokenResponseDTO,API Response,[인증] 로그인
 OnboardingException,API Exception,[온보딩] 온보딩 저장
 OnboardingResponseDTO,API Response,[온보딩] 온보딩 저장

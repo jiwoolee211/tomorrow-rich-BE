@@ -10,8 +10,6 @@ API 분류 태그: API Request
 | monthlyBudget | Integer | Y | 월 예산 |
 | monthlySavingGoal | Integer | Y | 월간 절약 목표 |
 | fixedExpense | Integer | N | 고정비 |
-| frequentConsumptionCategories | List<String> | Y | 자주 하는 소비 |
-| targetSavingCategories | List<String> | Y | 줄이고 싶은 소비 |
 
 ### body
 
@@ -21,8 +19,6 @@ API 분류 태그: API Request
   "characterName": "말랑이",
   "monthlyBudget": 600000,
   "monthlySavingGoal": 100000,
-  "fixedExpense": 150000,
-  "frequentConsumptionCategories": ["DELIVERY", "CAFE", "SHOPPING"],
-  "targetSavingCategories": ["DELIVERY", "CAFE"]
+  "fixedExpense": 150000
 }
 ```
