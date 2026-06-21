@@ -5,9 +5,9 @@ import java.util.List;
 public record MissionListResponseDTO(
         String date,
         Boolean isFuture,
-        List<MissionDTO> missions
+        List<MissionDTO> todayMissions,
+        List<MissionDTO> dailyMissions
 ) {
-
     public record MissionDTO(
             Long missionId,
             String title,

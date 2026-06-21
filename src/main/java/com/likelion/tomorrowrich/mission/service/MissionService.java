@@ -42,16 +42,19 @@ public class MissionService {
         User user = findUser(userId);
         LocalDate missionDate = parseDate(date);
 
-        List<MissionListResponseDTO.MissionDTO> missions = missionRepository
+        List<MissionListResponseDTO.MissionDTO> todayMissions = missionRepository
                 .findAllByUserAndMissionDate(user, missionDate)
                 .stream()
                 .map(this::toMissionDTO)
                 .toList();
 
+        List<MissionListResponseDTO.MissionDTO> dailyMissions = createDailyMissions(missionDate);
+
         return new MissionListResponseDTO(
                 missionDate.toString(),
                 missionDate.isAfter(LocalDate.now()),
-                missions
+                todayMissions,
+                dailyMissions
         );
     }
 
@@ -108,6 +111,24 @@ public class MissionService {
                 mission.getRewardPoint(),
                 mission.getStatus().name(),
                 mission.getPointReceived()
+        );
+    }
+
+    private List<MissionListResponseDTO.MissionDTO> createDailyMissions(LocalDate missionDate) {
+        boolean isFuture = missionDate.isAfter(LocalDate.now());
+
+        return List.of(
+                new MissionListResponseDTO.MissionDTO(
+                        null,
+                        "출석체크",
+                        "오늘 앱에 접속했어요.",
+                        "ATTENDANCE_CHECK",
+                        isFuture ? 0 : 1,
+                        1,
+                        0,
+                        isFuture ? "SCHEDULED" : "COMPLETED",
+                        false
+                )
         );
     }
 
