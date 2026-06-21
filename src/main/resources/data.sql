@@ -15,7 +15,7 @@ INSERT INTO users (
 ) VALUES (
     1,
     'testuser',
-    'password',
+    '$2a$10$yjGmYS2ziF.DYNnYgDiK4.PQRtf/Iv/FThWDSLLdRblI9FqpwLxeC',
     '테스트유저',
     '말랑이',
     500000,

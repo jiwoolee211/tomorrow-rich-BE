@@ -42,6 +42,11 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("로그아웃 성공");
+    }
+
     @GetMapping("/check-login-id")
     public ResponseEntity<CheckLoginIdResponseDTO> checkLoginId(
             @RequestParam(required = false) String loginId
