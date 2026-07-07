@@ -137,6 +137,9 @@
 git clone https://github.com/jiwoolee211/tomorrow-rich-BE.git
 cd tomorrow-rich-BE
 ./gradlew bootRun
+```
+
+---
 
 ## 발표 자료
 
