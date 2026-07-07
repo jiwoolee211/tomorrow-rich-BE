@@ -137,3 +137,7 @@
 git clone https://github.com/jiwoolee211/tomorrow-rich-BE.git
 cd tomorrow-rich-BE
 ./gradlew bootRun
+
+## 발표 자료
+
+- [내일은 부자 발표 자료](docs/성북연합해커톤_내일은부자.pdf)
